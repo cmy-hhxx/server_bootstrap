@@ -12,10 +12,45 @@
 
 ## 快速开始
 
+### 0. 网络不通时的解决方案 ⚠️
+
+如果服务器无法访问 GitHub，使用以下任一方法：
+
+**方法一：使用 GitHub 加速服务**
+```bash
+# 使用 ghproxy 加速
+git clone https://ghproxy.com/https://github.com/cmy-hhxx/server_bootstrap.git
+
+# 或使用 fastgit
+git clone https://hub.fastgit.xyz/cmy-hhxx/server_bootstrap.git
+```
+
+**方法二：手动下载并上传（推荐）**
+```bash
+# 在本地电脑下载 zip 包
+# https://github.com/cmy-hhxx/server_bootstrap/archive/refs/heads/main.zip
+
+# 上传到服务器
+scp server_bootstrap-main.zip user@server:/tmp/
+
+# 在服务器上解压
+cd /tmp
+unzip server_bootstrap-main.zip
+mv server_bootstrap-main server-bootstrap
+cd server-bootstrap
+```
+
+**方法三：使用 Gitee 镜像（如果已同步）**
+```bash
+git clone https://gitee.com/your-username/server_bootstrap.git
+```
+
 ### 1. 克隆仓库
 
+如果服务器网络正常：
+
 ```bash
-git clone <your-repo-url> server-bootstrap
+git clone https://github.com/cmy-hhxx/server_bootstrap.git
 cd server-bootstrap
 ```
 
@@ -88,6 +123,24 @@ server-bootstrap/
 ```
 
 ## 常见问题
+
+### Q: 服务器无法访问 GitHub 怎么办？
+
+A: 这是最常见的问题，有三种解决方案：
+
+**最简单：手动下载上传**
+1. 在本地浏览器访问：https://github.com/cmy-hhxx/server_bootstrap/archive/refs/heads/main.zip
+2. 下载 zip 文件
+3. 使用 scp 上传到服务器：`scp server_bootstrap-main.zip user@server:/tmp/`
+4. 在服务器解压：`unzip server_bootstrap-main.zip && cd server_bootstrap-main`
+
+**使用加速服务：**
+```bash
+git clone https://ghproxy.com/https://github.com/cmy-hhxx/server_bootstrap.git
+```
+
+**同步到 Gitee：**
+在 Gitee 创建仓库并同步，然后使用 Gitee 地址克隆
 
 ### Q: Clash 配置下载失败怎么办？
 
