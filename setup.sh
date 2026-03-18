@@ -49,21 +49,6 @@ check_system() {
     log_success "System check passed: Ubuntu $VERSION_ID"
 }
 
-# Check and load configuration
-load_config() {
-    log_info "Loading configuration..."
-
-    if [ ! -f "$SCRIPT_DIR/config.sh" ]; then
-        log_error "Configuration file not found!"
-        log_info "Please create config.sh from the template:"
-        log_info "  cp config.example.sh config.sh"
-        log_info "  vim config.sh"
-        exit 1
-    fi
-
-    source "$SCRIPT_DIR/config.sh"
-    log_success "Configuration loaded"
-}
 
 # Deploy dotfiles
 deploy_dotfiles() {
@@ -98,7 +83,6 @@ main() {
     echo -e "${NC}"
 
     check_system
-    load_config
 
     # Run installation scripts
     log_info "Starting installation process..."

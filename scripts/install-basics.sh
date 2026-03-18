@@ -14,41 +14,27 @@ log_success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
 log_warning() { echo -e "${YELLOW}[WARNING]${NC} $1"; }
 log_error() { echo -e "${RED}[ERROR]${NC} $1"; }
 
-# Configure APT mirror
+# Configure APT mirror (use Aliyun by default)
 configure_apt_mirror() {
-    if [ -n "$APT_MIRROR" ]; then
-        log_info "Configuring APT mirror: $APT_MIRROR"
+    log_info "Configuring APT mirror: Aliyun"
 
-        local mirror_url
-        case "$APT_MIRROR" in
-            aliyun)
-                mirror_url="http://mirrors.aliyun.com/ubuntu/"
-                ;;
-            tsinghua)
-                mirror_url="https://mirrors.tuna.tsinghua.edu.cn/ubuntu/"
-                ;;
-            *)
-                log_warning "Unknown mirror: $APT_MIRROR, using default"
-                return
-                ;;
-        esac
+    local mirror_url="http://mirrors.aliyun.com/ubuntu/"
 
-        # Backup original sources.list
-        sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
+    # Backup original sources.list
+    sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
 
-        # Get Ubuntu codename
-        local codename=$(lsb_release -cs)
+    # Get Ubuntu codename
+    local codename=$(lsb_release -cs)
 
-        # Create new sources.list
-        sudo tee /etc/apt/sources.list > /dev/null <<EOF
+    # Create new sources.list
+    sudo tee /etc/apt/sources.list > /dev/null <<EOF
 deb $mirror_url $codename main restricted universe multiverse
 deb $mirror_url $codename-updates main restricted universe multiverse
 deb $mirror_url $codename-backports main restricted universe multiverse
 deb $mirror_url $codename-security main restricted universe multiverse
 EOF
 
-        log_success "APT mirror configured"
-    fi
+    log_success "APT mirror configured"
 }
 
 # Update package list
@@ -103,14 +89,7 @@ install_ripgrep() {
 
 # Configure git
 configure_git() {
-    if [ -n "$GIT_USER_NAME" ] && [ -n "$GIT_USER_EMAIL" ]; then
-        log_info "Configuring git..."
-        git config --global user.name "$GIT_USER_NAME"
-        git config --global user.email "$GIT_USER_EMAIL"
-        log_success "Git configured"
-    else
-        log_info "Git user info not provided, skipping git configuration"
-    fi
+    log_info "Skipping git configuration (configure manually if needed)"
 }
 
 # Main
