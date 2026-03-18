@@ -103,20 +103,12 @@ main() {
     # Run installation scripts
     log_info "Starting installation process..."
 
-    # Install basic tools (no proxy needed)
+    # Install basic tools
     if [ -f "$SCRIPT_DIR/scripts/install-basics.sh" ]; then
         log_info "Installing basic tools..."
         bash "$SCRIPT_DIR/scripts/install-basics.sh"
     else
         log_warning "install-basics.sh not found, skipping"
-    fi
-
-    # Install Clash proxy
-    if [ "$INSTALL_CLASH" = true ] && [ -f "$SCRIPT_DIR/scripts/install-clash.sh" ]; then
-        log_info "Installing Clash proxy..."
-        bash "$SCRIPT_DIR/scripts/install-clash.sh"
-    else
-        log_info "Skipping Clash installation"
     fi
 
     # Deploy dotfiles
@@ -127,7 +119,6 @@ main() {
     echo "  Setup Complete!"
     echo "========================================="
     echo -e "${NC}"
-    log_info "Network proxy is ready (if Clash was installed)"
     log_info "You can now install additional tools:"
     log_info "  - Claude Code: https://docs.anthropic.com/en/docs/claude-code"
     log_info "  - Codex: https://github.com/anthropics/codex"
