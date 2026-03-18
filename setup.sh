@@ -57,7 +57,8 @@ deploy_dotfiles() {
     local dotfiles_dir="$SCRIPT_DIR/dotfiles"
     local backup_dir="$HOME/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
 
-    for file in bashrc tmux.conf vimrc; do
+    # Skip bashrc to avoid overwriting user's shell configuration
+    for file in tmux.conf vimrc; do
         local target="$HOME/.$file"
         local source="$dotfiles_dir/$file"
 
@@ -71,6 +72,7 @@ deploy_dotfiles() {
         log_success "Linked .$file"
     done
 
+    log_info "Skipped .bashrc (to preserve your shell configuration)"
     log_success "Dotfiles deployed successfully"
 }
 

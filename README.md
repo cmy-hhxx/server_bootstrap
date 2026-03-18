@@ -6,7 +6,7 @@
 
 - 自动安装常用开发工具（git, vim, tmux, jq, ripgrep 等）
 - 配置 APT 阿里云镜像源加速下载
-- 部署个人配置文件（.bashrc, .tmux.conf, .vimrc）
+- 部署个人配置文件（.tmux.conf, .vimrc）
 
 ## 使用方法
 
@@ -48,7 +48,7 @@ source ~/.bashrc
 - git, curl, wget, vim, tmux, build-essential, jq, ripgrep
 
 **配置文件**
-- .bashrc, .tmux.conf, .vimrc
+- .tmux.conf, .vimrc（不会覆盖 .bashrc）
 
 ## 系统要求
 
